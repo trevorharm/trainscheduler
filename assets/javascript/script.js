@@ -19,7 +19,7 @@ $(document).ready(function () {
         // grab user inputs and store in variables
         var name = $("#name-input").val().trim();
         var destination = $("#destination-input").val().trim();
-        var time = moment($("#time-input").val().trim(), "DD/MM/YY").format("X");
+        var time = moment($("#time-input").val().trim(), "HH:MM").format("hh:mm");
         var frequency = $("#frequency-input").val().trim();
 
         // validate no empty input
@@ -67,21 +67,21 @@ $(document).ready(function () {
         console.log(trainStart);
         console.log(trainFrequency);
       
-        // Prettify the employee start
-        // var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
+        // Momentify the train start time
+        // var trainStartPretty = moment.unix(trainStart).format("MM/DD/YY");
       
-        // Calculate the months worked using hardcore math
-        // To calculate the months worked
-        // var empMonths = moment().diff(moment.unix(empStart, "X"), "months");
-        console.log(empMonths);
+        // Calculate the train frequency using hardcore math
+        // To calculate the train frequency
+        // var nextArrival = moment().diff(moment.unix(trainStart, "X"), "months");
+        // console.log(nextArrival);
       
-        // Calculate the total billed rate
-        // var empBilled = empMonths * empRate;
-        console.log(empBilled);
+        // Calculate minute away for the next train
+        // var minsAway = empMonths * empRate;
+        // console.log(minsAway);
       
         // Add each train's data into the table
-        // $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-        // empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
+        $("#train-schedule > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" +
+        trainStartPretty + "</td><td>" + trainFrequency + "</td><td>" + nextArrival + "</td><td>" + minsAway + "</td></tr>");
     });
 
     });
