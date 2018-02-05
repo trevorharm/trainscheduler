@@ -19,14 +19,14 @@ $(document).ready(function () {
         // grab user inputs and store in variables
         var name = $("#name-input").val().trim();
         var destination = $("#destination-input").val().trim();
-        var time = moment($("#time-input").val().trim(), "HH:mm").format("");
+        var time = moment($("#time-input").val().trim(), "hh:mm").format("");
         var frequency = $("#frequency-input").val().trim();
 
         // validate no empty input
         if (($("#name-input").val() == "")
-        || ($("#destination-input").val() == "")
-                || ($("#time-input").val() == "")
-                || ($("#frequency-input").val() == "")) {
+            || ($("#destination-input").val() == "")
+            || ($("#time-input").val() == "")
+            || ($("#frequency-input").val() == "")) {
             alert("Every Input Needs A Value!")
             return;
         };
@@ -73,18 +73,25 @@ $(document).ready(function () {
 
 
         // Calculate the train frequency using hardcore math
+        // First Time (pushed back 1 year to make sure it comes before current time)
+        var firstTimeConverted = moment(trainStart, "hh:mm").subtract(1, "years");
+        console.log(firstTimeConverted);
         // To calculate the train frequency
         var currentTime = moment();
-        var nextArrival = moment().diff(moment(trainStart), "minutes");
-        console.log(nextArrival);
+        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+
+        // Time apart (remainder)
+        var tRemainder = diffTime % trainFrequency;
 
         // Calculate minutes away for the next train
-        var minsAway = nextArrival % trainFrequency;
-        console.log(minsAway);
+        var minsAway = trainFrequency - tRemainder;
+        
+        // Next Train Arrival
+        var nextArrival = moment().add(minsAway, "minutes");
 
         // Add each train's data into the table
         $("#train-schedule > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" +
-        trainFrequency + "</td><td>" + nextArrival + "</td><td>" + minsAway + "</td></tr>");
+            trainFrequency + "</td><td>" + nextArrival + "</td><td>" + minsAway + "</td></tr>");
         // $("#train-schedule > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + trainFrequency + "</td></tr>");
 
     });
