@@ -74,17 +74,18 @@ $(document).ready(function () {
 
         // Calculate the train frequency using hardcore math
         // To calculate the train frequency
-        // var nextArrival = moment().diff(moment.unix(trainStart, "X"), "months");
-        // console.log(nextArrival);
+        var currentTime = moment();
+        var nextArrival = moment().diff(moment(trainStart), "minutes");
+        console.log(nextArrival);
 
-        // Calculate minute away for the next train
-        // var minsAway = empMonths * empRate;
-        // console.log(minsAway);
+        // Calculate minutes away for the next train
+        var minsAway = nextArrival % trainFrequency;
+        console.log(minsAway);
 
         // Add each train's data into the table
-        // $("#train-schedule > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" +
-        // trainStartPretty + "</td><td>" + trainFrequency + "</td><td>" + nextArrival + "</td><td>" + minsAway + "</td></tr>");
-        $("#train-schedule > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + trainFrequency + "</td></tr>");
+        $("#train-schedule > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" +
+        trainFrequency + "</td><td>" + nextArrival + "</td><td>" + minsAway + "</td></tr>");
+        // $("#train-schedule > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + trainFrequency + "</td></tr>");
 
     });
 
