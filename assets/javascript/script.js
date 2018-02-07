@@ -87,8 +87,8 @@ $(document).ready(function () {
         var minsAway = trainFrequency - tRemainder;
         
         // Next Train Arrival
-        var nextArrival = moment().add(minsAway, "minutes");
-
+        var trainNextArrival = moment().add(minsAway, "minutes");
+        var nextArrival = moment(trainNextArrival).format("hh:mm");
         // Add each train's data into the table
         $("#train-schedule > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" +
             trainFrequency + "</td><td>" + nextArrival + "</td><td>" + minsAway + "</td></tr>");
