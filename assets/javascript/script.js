@@ -95,7 +95,7 @@ $(document).ready(function () {
         // $("#train-schedule > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + trainFrequency + "</td></tr>");
 
     });
-    // refresh pabe every 1 minute
+    // refresh page every 1 minute
     setTimeout(function () { 
         location.reload();
       }, 60000);
